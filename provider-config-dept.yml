@@ -1,0 +1,96 @@
+spring:
+ profile:
+  active:
+   - dev
+---
+server:
+  port: 8001
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.api.entity
+  mapper-locations: com/study/springcloud/provider/mapper/**/*.xml
+spring:
+  profiles: dev
+  application:
+    name: microservicecloud-dept
+  datasource:
+     type: com.alibaba.druid.pool.DruidDataSource
+     driverClassName: com.mysql.jdbc.Driver
+     druid:
+        url: jdbc:mysql://182.92.2.222:3306/db01?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: Ghj199829.
+        initial-size: 10
+        max-active: 100
+        min-idle: 10
+        max-wait: 60000
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: microservice-dept:8001
+    prefer-ip-address: true
+
+info:
+  app.name: microservicecloud
+  company.name: www.alibaba.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+
+
+---
+server:
+  port: 8002
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.api.entity
+  mapper-locations: com/study/springcloud/provider/mapper/**/*.xml
+spring:
+  profiles: test
+  application:
+    name: microservicecloud-dept
+  datasource:
+     type: com.alibaba.druid.pool.DruidDataSource
+     driverClassName: com.mysql.jdbc.Driver
+     druid:
+        url: jdbc:mysql://182.92.2.222:3306/db02?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: Ghj199829.
+        initial-size: 10
+        max-active: 100
+        min-idle: 10
+        max-wait: 60000
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: microservice-dept:8002
+    prefer-ip-address: true
+
+info:
+  app.name: microservicecloud
+  company.name: www.alibaba.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
